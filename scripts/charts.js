@@ -1,3 +1,4 @@
+// INIT CHARTS
 export default function initCharts() {
     setupChart({
         inputId: 'csvInput',
@@ -23,7 +24,7 @@ export default function initCharts() {
         pathKey: 'lastPath2'
     });
 }
-
+// CONFIG. CHART
 function setupChart(config) {
     const { inputId, pathId, toggleId, canvasId, placeholderId, titleId, storageKey, titleKey, pathKey } = config;
 
@@ -41,11 +42,9 @@ function setupChart(config) {
     if (savedTitle) titleEl.textContent = savedTitle;
     titleEl.addEventListener('input', () => localStorage.setItem(titleKey, titleEl.textContent));
 
-
     toggleBtn.addEventListener('click', () => {
         pathInput.classList.toggle('hidden');
     });
-
 
     pathInput.addEventListener('change', async () => {
         const path = pathInput.value.trim();
@@ -55,17 +54,23 @@ function setupChart(config) {
         }
     });
 
+    // IF NOT PATH, LOAD CSV
     const savedPath = localStorage.getItem(pathKey);
+    const savedCSV = localStorage.getItem(storageKey);
+
     if (savedPath) {
         pathInput.value = savedPath;
-        fetchLiveData(savedPath);
-    } else {
-        const savedCSV = localStorage.getItem(storageKey);
-        if (savedCSV) {
-            showChart();
-            const data = parseCSV(savedCSV);
-            chartInstance = updateChart(ctx, data, chartInstance);
-        }
+        fetchLiveData(savedPath).then(success => {
+            if (!success && savedCSV) loadStaticCSV(savedCSV);
+        });
+    } else if (savedCSV) {
+        loadStaticCSV(savedCSV);
+    }
+
+    function loadStaticCSV(content) {
+        showChart();
+        const data = parseCSV(content);
+        chartInstance = updateChart(ctx, data, chartInstance);
     }
 
     csvInput.addEventListener('change', (e) => {
@@ -80,10 +85,7 @@ function setupChart(config) {
         reader.onload = (event) => {
             const text = event.target.result;
             localStorage.setItem(storageKey, text);
-            showChart();
-            const data = parseCSV(text);
-            chartInstance = updateChart(ctx, data, chartInstance);
-
+            loadStaticCSV(text);
             fetchLiveData(fileName);
         };
         reader.readAsText(file);
@@ -92,17 +94,22 @@ function setupChart(config) {
     async function fetchLiveData(path) {
         try {
             const response = await fetch(path);
-            if (!response.ok) throw new Error('File not found');
+            if (!response.ok) return false;
+
             const text = await response.text();
+
+            if (text.includes('<html') || text.includes('<!DOCTYPE')) {
+                return false;
+            }
 
             if (text !== lastFetchedData) {
                 lastFetchedData = text;
-                showChart();
-                const data = parseCSV(text);
-                chartInstance = updateChart(ctx, data, chartInstance);
+                loadStaticCSV(text);
             }
+            return true;
         } catch (err) {
             console.error('Error fetching CSV:', err);
+            return false;
         }
     }
 
@@ -120,6 +127,7 @@ function setupChart(config) {
 }
 
 function parseCSV(text) {
+    if (text.includes('<html') || text.includes('<!DOCTYPE')) return { labels: [], values: [], header: '' };
     const lines = text.trim().split('\n');
     if (lines.length === 0) return { labels: [], values: [], header: '' };
 

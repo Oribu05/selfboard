@@ -107,3 +107,14 @@ export {
     removeTask,
     toggleTask
 };
+
+export function getTasksData() {
+    return JSON.parse(localStorage.getItem("tasks")) || [];
+}
+
+export function importTasksData(data) {
+    if (Array.isArray(data)) {
+        localStorage.setItem("tasks", JSON.stringify(data));
+        loadTasks();
+    }
+}

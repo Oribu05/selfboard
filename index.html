@@ -12,21 +12,28 @@
 
 <body class="bg-slate-900 text-white">
     <section class="max-w-6xl mx-auto p-4 flex justify-between">
-        <h3 class="text-2xl font-bold">My Dashboard</h3>
-        <a href="https://github.com/oribu05" class="text-blue-500 hover:text-blue-400"><i
-                class="ri-github-fill text-white text-2xl"></i></a>
+        <h3 class="text-2xl font-bold">My SelfBoard</h3>
+        <div class="flex gap-2">
+            <a href="https://github.com/oribu05/selfboard" class="text-blue-500 hover:text-blue-400">
+                <i class="ri-github-fill text-white text-2xl transition-all duration-500 hover:text-blue-400"></i>
+            </a>
+            <button id="shareBtn"
+                class="px-2 py-1 text-xs bg-white/5 border border-white/10 hover:bg-white/10 rounded-lg transition text-white cursor-pointer"><i
+                    class="ri-share-line"></i> Share this board</button>
+        </div>
+
     </section>
 
     <section class=" max-w-6xl mx-auto p-6" id="general">
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:h-[300px]">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:h-[330px]">
 
-            <div class="h-[200px] md:h-full">
+            <div class="h-[200px] md:h-full col-span-1 md:col-span-1">
                 <div id="weather" class="h-full"></div>
             </div>
 
             <div
-                class="col-span-1 md:col-span-2 flex flex-col min-h-0 bg-white/5 backdrop-blur-xl border border-white/10 shadow-lg shadow-black/20 p-4 rounded-2xl">
+                class="col-span-1 md:col-span-1 flex flex-col min-h-0 bg-white/5 backdrop-blur-xl border border-white/10 shadow-lg shadow-black/20 p-4 rounded-2xl">
 
                 <form id="task-form" class="flex gap-2 mb-3">
                     <input id="task-input"
@@ -50,6 +57,15 @@
 
             </div>
 
+            <div
+                class="col-span-1 md:col-span-1 flex flex-col min-h-0 bg-white/5 backdrop-blur-xl border border-white/10 shadow-lg shadow-black/20 p-4 rounded-2xl">
+                <div class="flex-1 w-full h-full">
+                    <div id="calendar" class="h-full"></div>
+                </div>
+            </div>
+
+
+
         </div>
 
     </section>
@@ -63,8 +79,10 @@
                         Add title to your graph...
                     </h3>
                     <div class="flex gap-2">
-                        <input type="text" id="csvPath1" placeholder="file.csv" class="hidden bg-white/5 border border-white/10 rounded-md px-2 py-1 text-xs text-white/70 outline-none focus:border-blue-500/50 w-24 transition">
-                        <button id="togglePath1" title="Link local file" class="text-white/40 hover:text-white/70 transition"><i class="ri-link"></i></button>
+                        <input type="text" id="csvPath1" placeholder="file.csv"
+                            class="hidden bg-white/5 border border-white/10 rounded-md px-2 py-1 text-xs text-white/70 outline-none focus:border-blue-500/50 w-24 transition">
+                        <button id="togglePath1" title="Link local file"
+                            class="text-white/40 hover:text-white/70 transition"><i class="ri-link"></i></button>
                         <label
                             class="cursor-pointer inline-flex items-center gap-1.5 bg-white/5 backdrop-blur border border-white/10 hover:bg-white/10 text-white/70 text-xs px-2.5 py-1 rounded-md transition">
                             Upload
@@ -87,8 +105,10 @@
                         Add title to your graph...
                     </h3>
                     <div class="flex gap-2">
-                        <input type="text" id="csvPath2" placeholder="file.csv" class="hidden bg-white/5 border border-white/10 rounded-md px-2 py-1 text-xs text-white/70 outline-none focus:border-blue-500/50 w-24 transition">
-                        <button id="togglePath2" title="Link local file" class="text-white/40 hover:text-white/70 transition"><i class="ri-link"></i></button>
+                        <input type="text" id="csvPath2" placeholder="file.csv"
+                            class="hidden bg-white/5 border border-white/10 rounded-md px-2 py-1 text-xs text-white/70 outline-none focus:border-blue-500/50 w-24 transition">
+                        <button id="togglePath2" title="Link local file"
+                            class="text-white/40 hover:text-white/70 transition"><i class="ri-link"></i></button>
                         <label
                             class="cursor-pointer inline-flex items-center gap-1.5 bg-white/5 backdrop-blur border border-white/10 hover:bg-white/10 text-white/70 text-xs px-2.5 py-1 rounded-md transition">
                             Upload
