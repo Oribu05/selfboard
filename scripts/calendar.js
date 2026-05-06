@@ -27,7 +27,7 @@ function formatDate(year, month, day) {
 export default function renderCalendar() {
     const calendarEl = document.getElementById("calendar");
     if (!calendarEl) return;
-    
+
     const firstDay = new Date(currentYear, currentMonth, 1).getDay();
     const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
     const now = new Date();
@@ -85,7 +85,7 @@ export default function renderCalendar() {
         const div = document.createElement("div");
         div.className = `p-1 rounded-md bg-white/5 backdrop-blur border ${isToday ? 'border-blue-500/50 bg-blue-500/5' : 'border-white/5'} hover:bg-white/10 cursor-pointer text-[10px] flex flex-col gap-0.5 min-h-[35px] transition-colors overflow-hidden`;
 
-        const eventsHtml = dayEvents.length > 0 
+        const eventsHtml = dayEvents.length > 0
             ? `<div class="mt-auto"><div class="w-1 h-1 rounded-full ${isToday ? 'bg-blue-400' : 'bg-white/20'} mx-auto mb-0.5"></div></div>`
             : "";
 
@@ -109,11 +109,11 @@ function openModal(dateKey, dayNumber) {
                 <h3 class="text-xl font-bold">Day ${dayNumber}</h3>
                 <button id="close-modal" class="text-white/40 hover:text-white transition"><i class="ri-close-line text-2xl"></i></button>
             </div>
-            <div id="modal-events-list" class="space-y-2 mb-6 max-h-[200px] overflow-y-auto pr-2">
-                ${dayEvents.length > 0 
-                    ? dayEvents.map((e, i) => `<div class="flex justify-between items-center bg-white/5 p-3 rounded-xl border border-white/5 group"><span class="text-white/80 text-sm">${e}</span><button class="delete-event text-red-400/0 group-hover:text-red-400/80 transition" data-index="${i}"><i class="ri-delete-bin-line"></i></button></div>`).join("")
-                    : '<p class="text-white/30 text-sm text-center py-4">No events</p>'
-                }
+            <div id="modal-events-list" class="space-y-2 mb-2 max-h-[200px] overflow-y-auto pr-2">
+                ${dayEvents.length > 0
+            ? dayEvents.map((e, i) => `<div class="flex justify-between items-center bg-white/5 p-3 rounded-xl border border-white/5 group"><span class="text-white/80 text-sm">${e}</span><button class="delete-event text-red-400/0 group-hover:text-red-400/80 transition" data-index="${i}"><i class="ri-delete-bin-line"></i></button></div>`).join("")
+            : '<p class="text-white/30 text-sm text-center py-4">No events</p>'
+        }
             </div>
             <div class="flex gap-2">
                 <input id="new-event-input" type="text" placeholder="New event..." class="flex-1 bg-white/5 border border-white/10 rounded-xl px-4 py-2 text-sm outline-none focus:border-blue-500/50 transition">

@@ -31,14 +31,21 @@ function renderTasks() {
     list.innerHTML = "";
     tasks.forEach(task => {
         const div = document.createElement("div");
-        div.className = "flex items-center justify-between bg-white/5 backdrop-blur border border-white/10 hover:bg-white/10 transition p-3 rounded-xl";
+        div.className = "flex items-start justify-between bg-white/5 backdrop-blur border border-white/10 hover:bg-white/10 transition p-3 rounded-xl gap-3 w-full";
         div.innerHTML = `
-            <div class="flex items-center gap-3">
-                <input type="checkbox" ${task.done ? "checked" : ""} class="accent-blue-500 w-4 h-4 cursor-pointer"/>
-                <span class="text-white/80 transition ${task.done ? "line-through opacity-40" : ""}">${task.text}</span>
+            <div class="flex items-start gap-3 flex-1 min-w-0"> 
+                <input type="checkbox" ${task.done ? "checked" : ""} 
+                    class="accent-blue-500 w-4 h-4 mt-1.5 cursor-pointer shrink-0"/>
+                <span class="text-white/80 break-words w-full leading-relaxed transition ${task.done ? "line-through opacity-40" : ""}">
+                    ${task.text}
+                </span>
             </div>
-            <button class="text-red-400/80 hover:text-red-300 text-sm transition"><i class="ri-delete-bin-line"></i></button>
+            
+            <button class="text-red-400/80 hover:text-red-300 text-lg transition shrink-0 p-1">
+                <i class="ri-delete-bin-line"></i>
+            </button>
         `;
+
         div.querySelector("input").onchange = () => toggleTask(task.id);
         div.querySelector("button").onclick = () => removeTask(task.id);
         list.appendChild(div);

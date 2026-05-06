@@ -4,6 +4,7 @@ import initCharts from "./charts.js";
 import renderCalendar, { handleRemoteCalendar } from "./calendar.js";
 import initShare from "./share.js";
 import { initP2P } from "./sync.js";
+import initShortcuts from "./shortcuts.js";
 
 // 1. Initialize sharing/room logic FIRST
 initShare();
@@ -16,3 +17,4 @@ localWeather();
 loadTasks();
 initCharts();
 renderCalendar();
+initShortcuts();

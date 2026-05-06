@@ -89,7 +89,8 @@ function openShareModal() {
                         <i class="ri-file-copy-line"></i>
                     </button>
                 </div>
-                <p class="text-[9px] text-white/20 text-center">Sharing this key allows real-time access to your encrypted data.</p>
+                <span class="text-[9px] text-white/20 text-center block">Sharing this key allows real-time access to your encrypted data.</span>
+                <span class="text-[9px] text-white/20 text-center block">Charts doesn't support remote connection. Please, upload your csv files manually</span>
             </div>
         </div>
     `;
@@ -114,7 +115,7 @@ function openShareModal() {
     };
 
     roomInput.oninput = (e) => updateUIForId(e.target.value.trim());
-    
+
     regenBtn.onclick = () => {
         const newId = generateSecureId();
         roomInput.value = newId;
